@@ -45,3 +45,17 @@ def get_item(item_id: int):
         if item["id"] == item_id:
             return item
     raise HTTPException(status_code=404, detail="Item not found")
+
+
+# --- Week 4: database health check ---
+import os
+import psycopg
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+
+
+@app.get("/health/db")
+def health_db():
+    with psycopg.connect(DATABASE_URL, connect_timeout=3) as conn:
+        n = conn.execute("SELECT count(*) FROM notes").fetchone()[0]
+    return {"db": "ok", "notes": n}
