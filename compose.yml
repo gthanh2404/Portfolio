@@ -4,7 +4,7 @@ services:
     ports:
       - "3000:8000"
     environment:
-      DATABASE_URL: postgresql://app:${DB_PASSWORD}@db:5432/appdb
+      DATABASE_URL: postgresql://app:${DB_PASSWORD:?Set DB_PASSWORD in .env}@db:5432/appdb
       APP_NAME: ${APP_NAME:-sdp-starter}
     depends_on:
       db:
@@ -14,7 +14,7 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: app
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
       POSTGRES_DB: appdb
     volumes:
       - pgdata:/var/lib/postgresql/data
