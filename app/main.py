@@ -59,3 +59,4 @@ def health_db():
     with psycopg.connect(DATABASE_URL, connect_timeout=3) as conn:
         n = conn.execute("SELECT count(*) FROM notes").fetchone()[0]
     return {"db": "ok", "notes": n}
+MISSING = os.environ["DEFINITELY_NOT_SET"]  # deliberate failure (Lab 3 Task F)
