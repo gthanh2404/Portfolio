@@ -49,6 +49,7 @@ def get_item(item_id: int):
 
 # --- Week 4: database health check ---
 import os
+
 import psycopg
 
 DATABASE_URL = os.environ["DATABASE_URL"]
